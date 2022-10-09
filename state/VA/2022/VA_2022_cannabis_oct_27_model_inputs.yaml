@@ -1,0 +1,25 @@
+user_inputs:
+    start_year: 2018.0
+    projection_years: 10.0
+    speed_run: true
+
+compartments_architecture:
+    pretrial: shell
+    prison: full
+    release: full
+
+reference_date: 2020.0
+# january
+time_step: 0.08333333333
+# one month
+
+disaggregation_axes:
+- crime
+
+data_inputs:
+  big_query_simulation_tag: cannabis_oct_27
+
+per_year_costs:
+# marginal costs
+  prison: 7973.64
+  release: 0.0
