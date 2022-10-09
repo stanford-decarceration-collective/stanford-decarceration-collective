@@ -23,23 +23,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.population_simulation.population_simulation import (
-    PopulationSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.population_simulation.population_simulation_factory import (
-    PopulationSimulationFactory,
-)
-from recidiviz.calculator.modeling.population_projection.shell_compartment import (
-    ShellCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.super_simulation.initializer import (
+from population_simulation.population_simulation import PopulationSimulation
+from population_simulation.population_simulation_factory import PopulationSimulationFactory
+from shell_compartment import ShellCompartment
+from spark_policy import SparkPolicy
+from super_simulation.initializer import (
     SimulationInputData,
     UserInputs,
 )
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
+from super_simulation.time_converter import TimeConverter
 
 
 class Simulator:

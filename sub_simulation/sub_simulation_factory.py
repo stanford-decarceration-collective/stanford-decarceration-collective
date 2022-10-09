@@ -20,25 +20,13 @@ from typing import Dict, List, Tuple
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.compartment_transitions import (
-    CompartmentTransitions,
-)
-from recidiviz.calculator.modeling.population_projection.full_compartment import (
-    FullCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.shell_compartment import (
-    ShellCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.spark_compartment import (
-    SparkCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.sub_simulation.sub_simulation import (
-    SubSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.initializer import (
-    UserInputs,
-)
+from compartment_transitions import CompartmentTransitions
+from full_compartment import FullCompartment
+from shell_compartment import ShellCompartment
+from spark_compartment import SparkCompartment
+from spark_policy import SparkPolicy
+from sub_simulation.sub_simulation import SubSimulation
+from super_simulation.initializer import UserInputs
 
 
 class SubSimulationFactory:

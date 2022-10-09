@@ -30,12 +30,8 @@ import pandas as pd
 from scipy.optimize import minimize
 from scipy.stats import lognorm
 
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    SIG_FIGS,
-)
+from super_simulation.time_converter import TimeConverter
+from utils.transitions_utils import SIG_FIGS
 
 
 def transitions_uniform(

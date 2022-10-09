@@ -9,6 +9,8 @@ matplotlib = "*"
 numpy = "*"
 pandas = "*"
 pandas_gbq = "*"
+pyyaml = "*"
+statsmodels = "*"
 
 [dev-packages]
 

@@ -21,16 +21,10 @@ from typing import Dict
 import numpy as np
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.cohort_table import CohortTable
-from recidiviz.calculator.modeling.population_projection.compartment_transitions import (
-    CompartmentTransitions,
-)
-from recidiviz.calculator.modeling.population_projection.spark_compartment import (
-    SparkCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    SIG_FIGS,
-)
+from cohort_table import CohortTable
+from compartment_transitions import CompartmentTransitions
+from spark_compartment import SparkCompartment
+from utils.transitions_utils import SIG_FIGS
 
 
 class FullCompartment(SparkCompartment):

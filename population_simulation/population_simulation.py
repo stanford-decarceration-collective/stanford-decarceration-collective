@@ -22,9 +22,7 @@ from typing import Any, Callable, Dict, Optional, Tuple
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.sub_simulation.sub_simulation import (
-    SubSimulation,
-)
+from sub_simulation.sub_simulation import SubSimulation
 
 
 class PopulationSimulation:

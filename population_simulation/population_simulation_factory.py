@@ -22,23 +22,15 @@ from typing import Any, Dict, List
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.population_simulation.population_simulation import (
-    PopulationSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.sub_simulation.sub_simulation import (
-    SubSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.sub_simulation.sub_simulation_factory import (
-    SubSimulationFactory,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.initializer import (
+from population_simulation.population_simulation import PopulationSimulation
+from spark_policy import SparkPolicy
+from sub_simulation.sub_simulation import SubSimulation
+from sub_simulation.sub_simulation_factory import SubSimulationFactory
+from super_simulation.initializer import (
     SimulationInputData,
     UserInputs,
 )
-from recidiviz.calculator.modeling.population_projection.transition_table import (
-    TransitionTable,
-)
+from transition_table import TransitionTable
 
 
 class PopulationSimulationFactory:

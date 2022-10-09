@@ -20,15 +20,9 @@ from typing import Dict
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.full_compartment import (
-    FullCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.shell_compartment import (
-    ShellCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.spark_compartment import (
-    SparkCompartment,
-)
+from full_compartment import FullCompartment
+from shell_compartment import ShellCompartment
+from spark_compartment import SparkCompartment
 
 
 class SubSimulation:

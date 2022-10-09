@@ -20,9 +20,7 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    SIG_FIGS,
-)
+from utils.transitions_utils import SIG_FIGS
 
 
 class TimeConverter:

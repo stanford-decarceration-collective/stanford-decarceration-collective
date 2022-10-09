@@ -35,3 +35,10 @@ The Spark Google Drive folder contains a lot of additional resources including:
 - More detailed Spark methodology
 - Data pre-processing onboarding materials
 - Output from data pre-processing
+
+## Port of Recidiviz code
+
+This is basically just the entire recidiviz.calculator.population_projection.modeling directory copied over from [pulse-data](https://github.com/Recidiviz/pulse-data). There are a few specifics of the move worth mentioning:
+* We took recidiviz.utils.yaml_dict and moved it into our utils folder
+* We didn't take the microsimulations folder or any of the Recidiviz notebooks
+* 

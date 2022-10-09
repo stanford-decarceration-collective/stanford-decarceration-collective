@@ -20,16 +20,10 @@ from typing import Dict, List, Optional
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.predicted_admissions import (
-    PredictedAdmissions,
-)
-from recidiviz.calculator.modeling.population_projection.spark_compartment import (
-    SparkCompartment,
-)
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    MIN_POSSIBLE_POLICY_TS,
-)
+from predicted_admissions import PredictedAdmissions
+from spark_compartment import SparkCompartment
+from spark_policy import SparkPolicy
+from utils.transitions_utils import MIN_POSSIBLE_POLICY_TS
 
 
 class ShellCompartment(SparkCompartment):

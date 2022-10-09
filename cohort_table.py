@@ -18,7 +18,7 @@
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
+from utils.transitions_utils import (
     SIG_FIGS,
 )
 

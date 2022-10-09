@@ -23,9 +23,7 @@ import numpy as np
 import pandas as pd
 from pytz import timezone
 
-from recidiviz.calculator.modeling.population_projection.super_simulation.super_simulation_factory import (
-    SuperSimulationFactory,
-)
+from super_simulation.super_simulation_factory import SuperSimulationFactory
 
 # Number of years for the validation window and duration of the prediction interval
 NUM_VALIDATION_YEARS = 5

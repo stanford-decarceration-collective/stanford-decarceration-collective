@@ -23,22 +23,12 @@ from typing import Callable, Dict, List, Optional, Tuple
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.population_simulation.population_simulation import (
-    PopulationSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.super_simulation.exporter import (
-    Exporter,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.initializer import (
-    Initializer,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.simulator import (
-    Simulator,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.validator import (
-    Validator,
-)
+from population_simulation.population_simulation import PopulationSimulation
+from spark_policy import SparkPolicy
+from super_simulation.exporter import Exporter
+from super_simulation.initializer import Initializer
+from super_simulation.simulator import Simulator
+from super_simulation.validator import Validator
 
 
 class SuperSimulation:

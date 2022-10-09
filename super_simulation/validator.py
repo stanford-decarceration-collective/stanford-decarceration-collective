@@ -21,12 +21,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.population_simulation.population_simulation import (
-    PopulationSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
+from population_simulation.population_simulation import PopulationSimulation
+from super_simulation.time_converter import TimeConverter
 
 
 class Validator:

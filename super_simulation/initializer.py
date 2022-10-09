@@ -22,10 +22,8 @@ from typing import Callable, Dict, List, Optional, Tuple, Union
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
-from recidiviz.calculator.modeling.population_projection.utils import (
+from super_simulation.time_converter import TimeConverter
+from utils import (
     ignite_bq_utils,
     spark_bq_utils,
 )

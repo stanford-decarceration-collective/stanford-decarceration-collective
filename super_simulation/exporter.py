@@ -19,10 +19,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
-from recidiviz.calculator.modeling.population_projection.utils import bq_utils
+from super_simulation.time_converter import TimeConverter
+from utils import bq_utils
 
 
 class Exporter:

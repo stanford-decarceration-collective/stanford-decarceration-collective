@@ -21,13 +21,9 @@ from typing import Dict, List
 
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.transition_table import (
-    TransitionTable,
-)
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    MIN_POSSIBLE_POLICY_TS,
-)
+from spark_policy import SparkPolicy
+from transition_table import TransitionTable
+from utils.transitions_utils import MIN_POSSIBLE_POLICY_TS
 
 
 class CompartmentTransitions:

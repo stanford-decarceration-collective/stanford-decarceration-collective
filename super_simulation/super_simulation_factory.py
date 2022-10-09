@@ -19,28 +19,18 @@ from typing import Dict, Tuple, Union
 
 import numpy as np
 
-from recidiviz.calculator.modeling.population_projection.super_simulation.exporter import (
-    Exporter,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.initializer import (
+from super_simulation.exporter import Exporter
+from super_simulation.initializer import (
     Initializer,
     MacroSimulationDataInputs,
     MicroSimulationDataInputs,
     UserInputs,
 )
-from recidiviz.calculator.modeling.population_projection.super_simulation.simulator import (
-    Simulator,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.super_simulation import (
-    SuperSimulation,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.time_converter import (
-    TimeConverter,
-)
-from recidiviz.calculator.modeling.population_projection.super_simulation.validator import (
-    Validator,
-)
-from recidiviz.utils.yaml_dict import YAMLDict
+from super_simulation.simulator import Simulator
+from super_simulation.super_simulation import SuperSimulation
+from super_simulation.time_converter import TimeConverter
+from super_simulation.validator import Validator
+from utils.yaml_dict import YAMLDict
 
 
 class SuperSimulationFactory:

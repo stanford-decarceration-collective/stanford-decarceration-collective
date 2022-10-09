@@ -21,10 +21,8 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 import pandas as pd
 
-from recidiviz.calculator.modeling.population_projection.spark_policy import SparkPolicy
-from recidiviz.calculator.modeling.population_projection.utils.transitions_utils import (
-    SIG_FIGS,
-)
+from spark_policy import SparkPolicy
+from utils.transitions_utils import SIG_FIGS
 
 
 class TransitionTable:

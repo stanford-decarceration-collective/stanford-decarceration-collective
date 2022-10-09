@@ -22,10 +22,8 @@ from typing import Any, Dict, List
 import pandas as pd
 import pandas_gbq
 
-from recidiviz.calculator.modeling.population_projection.utils.bq_utils import (
-    store_simulation_results,
-)
-from recidiviz.utils.yaml_dict import YAMLDict
+from utils.bq_utils import store_simulation_results
+from utils.yaml_dict import YAMLDict
 
 # Constants for the Spark input data
 SPARK_INPUT_PROJECT_ID = "recidiviz-staging"
