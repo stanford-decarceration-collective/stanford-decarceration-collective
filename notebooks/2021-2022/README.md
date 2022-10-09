@@ -1,0 +1,2 @@
+# 8 October 2022
+This folder contains most (but not all) of the modeling done in the 2021-2022 school year. At time of writing, all the notebooks have been fixed up so they all run without breaking. They probably won't be kept up in the 2022-2023 school year though and so may break.
