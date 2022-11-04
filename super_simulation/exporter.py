@@ -348,8 +348,8 @@ class Exporter:
                     axis=1
                 )
             ].empty:
-                cost_multipliers = cost_multipliers.append(
+                cost_multipliers = pd.concat([cost_multipliers, pd.DataFrame(
                     {**subgroup_dict, **{"multiplier": 1}}, ignore_index=True
-                )
+                )])
 
         return cost_multipliers
