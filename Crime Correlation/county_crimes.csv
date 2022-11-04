@@ -1,0 +1,941 @@
+"Lead: Grace 
+Matthews
+",,,,,,,,
+County / Year,2017,2018,2019,2020,2021,Source,FY or AY,Notes
+Alameda,,,,,,,,
+"- All Violent 
+Crimes",675,670,633,700,651,,,
+- Homicide,8,7,5,5,3,,,
+- Rape,28,35,27,27,27,,,
+- Robbery ,227,223,210,162,203,,,
+"- Aggravated 
+Assault",412,405,391,506,418,,,
+"- All Property 
+Crimes",2202,2064,2169,2286,1893,,,
+- Arson,30,23,21,22,-,,,
+- Burglary,377,385,354,369,256,,,
+- Larceny-theft,1156,1192,1324,1165,970,,,
+"- Motor vehicle 
+theft ",669,487,491,752,667,,,
+,,,,,,,,
+Alpine,,,,,,,,
+"- All Violent 
+Crimes",13,12,13,19,19,,,
+- Homicide,0,0,0,0,0,,,
+- Rape,-,2,2,0,2,,,
+- Robbery ,0,1,0,0,0,,,
+"- Aggravated 
+Assault",13,9,11,19,17,,,
+"- All Property 
+Crimes",29,27,29,13,23,,,
+- Arson,0,0,0,0,-,,,
+- Burglary,8,11,12,4,8,,,
+- Larceny-theft,21,16,14,9,14,,,
+"- Motor vehicle 
+theft ",0,0,3,0,1,,,
+,,,,,,,,
+Amador,,,,,,,,
+"- All Violent 
+Crimes",87,83,66,90,88,,,
+- Homicide,3,3,1,2,4,,,
+- Rape,7,8,3,5,7,,,
+- Robbery ,5,5,8,7,8,,,
+"- Aggravated 
+Assault",75,67,54,76,69,,,
+"- All Property 
+Crimes",356,338,416,312,407,,,
+- Arson,0,4,4,3,-,,,
+- Burglary,98,78,146,92,103,,,
+- Larceny-theft,248,258,268,218,300,,,
+"- Motor vehicle 
+theft ",10,2,2,2,4,,,
+,,,,,,,,
+Butte,,,,,,,,
+"- All Violent 
+Crimes",161,327,283,341,350,,,
+- Homicide,5,3,5,5,8,,,
+- Rape,49,32,32,44,36,,,
+- Robbery ,27,31,28,27,27,,,
+"- Aggravated 
+Assault",80,261,218,265,279,,,
+"- All Property 
+Crimes","1,229",1394,1290,1120,1025,,,
+- Arson,0,2,3,5,-,,,
+- Burglary,616,588,524,422,349,,,
+- Larceny-theft,589,757,724,674,654,,,
+"- Motor vehicle 
+theft ",24,49,42,24,22,,,
+,,,,,,,,
+Calaveras,,,,,,,,
+"- All Violent 
+Crimes",200,187,139,146,164,,,
+- Homicide,2,2,1,0,2,,,
+- Rape,29,27,32,18,32,,,
+- Robbery ,17,14,8,5,4,,,
+"- Aggravated 
+Assault",152,144,98,123,126,,,
+"- All Property 
+Crimes",588,615,668,557,471,,,
+- Arson,0,0,0,0,-,,,
+- Burglary,214,217,274,209,158,,,
+- Larceny-theft,359,376,380,335,293,,,
+"- Motor vehicle 
+theft ",11,22,14,13,20,,,
+,,,,,,,,
+Colusa,,,,,,,,
+"- All Violent 
+Crimes",60,24,26,24,23,,,"from 2011-2020: 2017 had largest uptick in violent crime
+by at least 30 cases"
+- Homicide,1,2,0,0,0,,,
+- Rape,9,7,8,3,6,,,
+- Robbery ,1,5,4,3,4,,,
+"- Aggravated 
+Assault",49,10,14,18,13,,,
+"- All Property 
+Crimes",151,185,169,165,132,,,
+- Arson,2,1,3,3,-,,,
+- Burglary,57,68,53,55,40,,,
+- Larceny-theft,91,114,111,108,89,,,
+"- Motor vehicle 
+theft ",3,3,5,2,3,,,
+,,,,,,,,
+Contra Costa,,,,,,,,
+"- All Violent 
+Crimes",318,300,332,298,297,,,
+- Homicide,3,4,8,4,10,,,
+- Rape,28,25,28,14,25,,,
+- Robbery ,110,111,89,82,67,,,
+"- Aggravated 
+Assault",177,111,89,82,195,,,
+"- All Property 
+Crimes",1525,1462,1499,1178,1486,,,
+- Arson,12,10,11,5,-,,,
+- Burglary,500,376,411,304,280,,,
+- Larceny-theft,993,1062,1053,827,1177,,,
+"- Motor vehicle 
+theft ",32,24,35,47,29,,,
+,,,,,,,,
+Del Norte,,,,,,,,
+"- All Violent 
+Crimes",113,102,84,121,132,,,
+- Homicide,4,1,2,2,1,,,"peak in 2017, highest since 2011, other highests = 2"
+- Rape,29,20,11,44,34,,,
+- Robbery ,12,12,18,15,15,,,
+"- Aggravated 
+Assault",68,69,53,60,82,,,
+"- All Property 
+Crimes",348,299,424,313,192,,,
+- Arson,18,4,12,13,-,,,"peak in 2017,"
+- Burglary,189,130,192,95,75,,,
+- Larceny-theft,148,163,228,212,109,,,
+"- Motor vehicle 
+theft ",11,6,4,6,8,,,
+,,,,,,,,
+El Dorado ,,,,,,,,
+"- All Violent 
+Crimes",206,239,173,219,333,,,peak in 2016
+- Homicide,5,2,3,0,4,,,peak 2015 
+- Rape,37,55,47,45,72,,,"one of lowest dips in 2017, 2016 was 36"
+- Robbery ,19,27,29,30,22,,,
+"- Aggravated 
+Assault",145,155,94,144,235,,,
+"- All Property 
+Crimes","2,003",1991,1695,1735,1534,,,slow decline since 2011
+- Arson,3,5,4,5,-,,,decline since 2011
+- Burglary,525,526,482,361,408,,,
+- Larceny-theft,"1,446",1432,1186,1353,1096,,,
+"- Motor vehicle 
+theft ",32,33,27,21,30,,,decline since 2104
+,,,,,,,,
+Fresno ,,,,,,,,
+"- All Violent 
+Crimes","1,213",604,599,594,1216,,,
+- Homicide,15,7,14,10,12,,,
+- Rape,38,39,38,56,49,,,
+- Robbery ,86,101,102,135,133,,,
+"- Aggravated 
+Assault","1,074",1387,928,936,1022,,,peak 2018
+"- All Property 
+Crimes",3334,3395,3281,3035,3146,,,
+- Arson,210,136,129,248,-,,,
+- Burglary,1469,1546,1378,1067,1043,,,
+- Larceny-theft,1249,1245,1304,1374,1397,,,
+"- Motor vehicle 
+theft ",616,604,599,594,706,,,
+,,,,,,,,
+Glenn ,,,,,,,,
+"- All Violent 
+Crimes",81,55,55,128,71,,,
+- Homicide,0,1,2,2,0,,,
+- Rape,5,9,8,14,12,,,
+- Robbery ,6,7,8,5,3,,,
+"- Aggravated 
+Assault",70,38,37,107,56,,,
+"- All Property 
+Crimes",235,444,362,288,200,,,peak 2018
+- Arson,2,3,3,1,-,,,
+- Burglary,100,132,86,85,53,,,
+- Larceny-theft,123,276,239,170,131,,,peak 2018
+"- Motor vehicle 
+theft ",12,36,37,33,16,,,
+,,,,,,,,
+Humboldt,,,,,,,,
+"- All Violent 
+Crimes",273,240,310,288,303,,,
+- Homicide,4,7,1,5,8,,,
+- Rape,25,17,21,23,38,,,
+- Robbery ,51,52,59,33,35,,,
+"- Aggravated 
+Assault",193,164,229,227,222,,,
+"- All Property 
+Crimes",949,899,1092,967,995,,,
+- Arson,15,16,17,18,-,,,
+- Burglary,362,338,398,364,406,,,
+- Larceny-theft,546,538,661,577,560,,,
+"- Motor vehicle 
+theft ",41,23,33,26,29,,,"very up and down, peak 2017"
+,,,,,,,,
+Imperial ,,,,,,,,
+"- All Violent 
+Crimes",137,241,211,200,166,,,
+- Homicide,1,3,2,1,3,,,
+- Rape,11,13,11,16,10,,,
+- Robbery ,6,15,7,9,12,,,peak 2018
+"- Aggravated 
+Assault",119,210,191,174,141,,,low point 2017
+"- All Property 
+Crimes",641,721,588,711,553,,,
+- Arson,14,21,22,35,-,,,
+- Burglary,218,174,178,239,183,,,
+- Larceny-theft,358,456,324,372,283,,,
+"- Motor vehicle 
+theft ",65,91,86,100,87,,,
+,,,,,,,,
+Inyo ,,,,,,,,
+"- All Violent 
+Crimes",84,80,60,101,82,,,
+- Homicide,0,0,1,1,0,,,
+- Rape,6,6,9,7,7,,,
+- Robbery ,6,4,3,8,13,,,
+"- Aggravated 
+Assault",72,70,47,85,62,,,
+"- All Property 
+Crimes",170,139,192,165,138,,,
+- Arson,3,3,0,3,-,,,
+- Burglary,63,58,86,67,50,,,
+- Larceny-theft,102,80,105,97,85,,,
+"- Motor vehicle 
+theft ",7,1,1,1,3,,,
+,,,,,,,,
+Kern ,,,,,,,,
+"- All Violent 
+Crimes",2017,2423,2864,3369,3715,,,"incline since 2017, in general: trend up since 2011"
+- Homicide,32,50,29,59,53,,,incline to 2016 then dip then up
+- Rape,134,177,244,143,137,,,lowest in 2017
+- Robbery ,429,420,433,454,470,,,
+"- Aggravated 
+Assault",1588,1776,2158,2713,3055,,,slow incline until 2017 then steep incline
+"- All Property 
+Crimes",9086,9472,9449,8708,8725,,,
+- Arson,341,300,275,279,-,,,peak 2017
+- Burglary,2815,2781,2756,2445,2267,,,stead decline since 2016
+- Larceny-theft,"4,316",4622,4680,3599,3556,,,
+"- Motor vehicle 
+theft ",1955,2069,2013,2664,2902,,,
+,,,,,,,,
+Kings,,,,,,,,
+"- All Violent 
+Crimes",165,133,125,103,119,,,
+- Homicide,2,2,2,2,2,,,
+- Rape,22,19,19,15,13,,,peak 2017
+- Robbery ,13,12,19,18,21,,,
+"- Aggravated 
+Assault",128,100,85,68,83,,,
+"- All Property 
+Crimes",473,100,85,68,402,,,
+- Arson,2,7,1,2,-,,,
+- Burglary,165,158,114,119,121,,,
+- Larceny-theft,283,281,297,242,257,,,
+"- Motor vehicle 
+theft ",25,23,21,16,24,,,
+,,,,,,,,
+Lake ,,,,,,,,
+"- All Violent 
+Crimes",221,201,193,193,258,,,
+- Homicide,6,4,3,1,4,,,peak 2018
+- Rape,26,13,21,10,29,,,peak 2018
+- Robbery ,9,20,19,11,17,,,
+"- Aggravated 
+Assault",180,164,150,171,208,,,
+"- All Property 
+Crimes",558,164,150,171,474,,,
+- Arson,11,10,5,11,-,,,
+- Burglary,284,278,204,237,223,,,
+- Larceny-theft,266,206,225,224,241,,,
+"- Motor vehicle 
+theft ",8,6,6,4,10,,,peak 2016
+,,,,,,,,
+Lassen,,,,,,,,
+"- All Violent 
+Crimes",60,57,78,70,56,,,
+- Homicide,1,0,0,0,0,,,
+- Rape,6,6,8,3,6,,,
+- Robbery ,2,3,0,7,5,,,
+"- Aggravated 
+Assault",51,48,70,60,45,,,
+"- All Property 
+Crimes",233,224,172,106,184,,,
+- Arson,3,7,1,2,-,,,
+- Burglary,106,109,100,55,70,,,
+- Larceny-theft,124,113,65,48,112,,,decline since 2017
+"- Motor vehicle 
+theft ",3,2,7,3,2,,,
+,,,,,,,,
+Los Angeles,,,,,,,,
+"- All Violent 
+Crimes",6118,5790,5564,5605,5523,,,decline since 2016
+- Homicide,71,73,68,96,135,,,
+- Rape,327,291,300,270,268,,,peak 2017
+- Robbery ,1566,1457,1443,1256,1016,,,
+"- Aggravated 
+Assault",4154,3969,3753,3983,4104,,,
+"- All Property 
+Crimes",17336,15912,15040,15554,15643,,,overall decline since peak in 2016
+- Arson,253,232,220,285,-,,,
+- Burglary,3789,3397,2798,2381,2140,,,declining since 2012
+- Larceny-theft,9155,8676,8595,8323,8369,,,decline since 2016
+"- Motor vehicle 
+theft ",4392,3839,3647,4850,5134,,,
+,,,,,,,,
+Madera ,,,,,,,,
+"- All Violent 
+Crimes",451,453,457,231,662,,,
+- Homicide,3,3,1,4,3,,,
+- Rape,23,32,34,22,65,,,
+- Robbery ,27,16,14,30,24,,,
+"- Aggravated 
+Assault",398,402,408,175,570,,,
+"- All Property 
+Crimes",1102,1138,1017,673,1125,,,
+- Arson,10,7,7,4,-,,,
+- Burglary,452,469,375,118,187,,,
+- Larceny-theft,606,640,621,528,892,,,
+"- Motor vehicle 
+theft ",44,29,21,27,46,,,peak in 2017
+,,,,,,,,
+Marin ,,,,,,,,
+"- All Violent 
+Crimes",91,96,63,90,75,,,
+- Homicide,1,2,1,1,1,,,
+- Rape,12,9,5,7,5,,,peak in 2017
+- Robbery ,10,15,12,13,10,,,10 = lowest
+"- Aggravated 
+Assault",68,70,45,69,59,,,
+"- All Property 
+Crimes",776,685,738,812,610,,,
+- Arson,3,5,1,1,-,,,
+- Burglary,153,128,143,151,84,,,
+- Larceny-theft,615,548,591,656,520,,,
+"- Motor vehicle 
+theft ",8,9,4,5,6,,,
+,,,,,,,,
+Mariposa ,,,,,,,,
+"- All Violent 
+Crimes",107,67,79,61,80,,,peak in 2017
+- Homicide,0,0,0,0,5,,,
+- Rape,9,7,8,12,10,,,
+- Robbery ,3,1,2,1,2,,,
+"- Aggravated 
+Assault",95,59,69,48,63,,,
+"- All Property 
+Crimes",269,192,171,183,223,,,
+- Arson,0,0,0,0,-,,,
+- Burglary,83,41,53,54,39,,,
+- Larceny-theft,184,147,115,125,183,,,
+"- Motor vehicle 
+theft ",2,4,3,4,1,,,
+,,,,,,,,
+Mendocino ,,,,,,,,
+"- All Violent 
+Crimes",254,213,178,187,174,,,"rise: 2012-2016
+decline: 2016-2021"
+- Homicide,3,5,2,6,8,,,
+- Rape,26,21,29,22,25,,,
+- Robbery ,21,28,14,12,6,,,
+"- Aggravated 
+Assault",278,204,159,133,135,,,
+"- All Property 
+Crimes",381,383,414,664,535,,,
+- Arson,11,13,18,19,-,,,
+- Burglary,185,199,174,187,188,,,
+- Larceny-theft,189,178,225,474,346,,,
+"- Motor vehicle 
+theft ",7,6,15,3,1,,,
+,,,,,,,,
+Merced ,,,,,,,,
+"- All Violent 
+Crimes",521,608,500,467,640,,,
+- Homicide,7,5,4,3,9,,,
+- Rape,16,25,19,19,15,,,
+- Robbery ,38,44,24,30,36,,,peak in 2018
+"- Aggravated 
+Assault",460,534,453,415,580,,,
+"- All Property 
+Crimes",1504,1434,1515,1357,1559,,,
+- Arson,13,5,8,10,-,,,
+- Burglary,554,439,487,360,447,,,
+- Larceny-theft,908,950,956,797,942,,,
+"- Motor vehicle 
+theft ",42,45,72,200,170,,,
+,,,,,,,,
+Modoc ,,,,,,,,
+"- All Violent 
+Crimes",19,27,31,23,5,,,
+- Homicide,0,0,0,1,0,,,
+- Rape,-,3,2,0,1,,,
+- Robbery ,0,1,1,1,0,,,
+"- Aggravated 
+Assault",19,23,28,21,4,,,peak in 2015
+"- All Property 
+Crimes",43,41,29,31,18,,,decline since 2011
+- Arson,0,1,0,1,-,,,
+- Burglary,9,15,6,10,5,,,
+- Larceny-theft,34,24,22,19,13,,,decline since 2011
+"- Motor vehicle 
+theft ",0,2,1,2,0,,,
+,,,,,,,,
+Mono ,,,,,,,,
+"- All Violent 
+Crimes",16,22,25,21,12,,,
+- Homicide,0,0,0,2,1,,,
+- Rape,0,6,3,3,4,,,peak in 2018
+- Robbery ,0,0,0,2,0,,,
+"- Aggravated 
+Assault",16,16,22,14,7,,,
+"- All Property 
+Crimes",58,45,53,58,31,,,
+- Arson,0,1,1,1,10,,,
+- Burglary,15,8,21,26,-,,,
+- Larceny-theft,38,36,32,31,21,,,
+"- Motor vehicle 
+theft ",5,1,0,1,0,,,
+,,,,,,,,
+Monterery ,,,,,,,,
+"- All Violent 
+Crimes",243,253,258,221,442,,,
+- Homicide,11,2,3,3,10,,,
+- Rape,31,32,25,30,34,,,
+- Robbery ,48,51,36,25,32,,,
+"- Aggravated 
+Assault",157,168,194,163,366,,,
+"- All Property 
+Crimes",1311,1331,1125,1084,885,,,
+- Arson,7,9,7,5,-,,,
+- Burglary,338,354,361,242,267,,,
+- Larceny-theft,927,935,733,803,590,,,
+"- Motor vehicle 
+theft ",46,42,31,39,28,,,peak in 2017
+,,,,,,,,
+Napa ,,,,,,,,
+"- All Violent 
+Crimes",56,72,69,57,62,,,
+- Homicide,0,1,0,0,0,,,
+- Rape,6,9,11,11,16,,,
+- Robbery ,3,3,7,4,6,,,
+"- Aggravated 
+Assault",47,59,51,42,40,,,
+"- All Property 
+Crimes",217,222,269,336,233,,,lowest = 2017
+- Arson,1,0,0,4,-,,,
+- Burglary,71,62,55,147,63,,,
+- Larceny-theft,143,152,212,175,167,,,
+"- Motor vehicle 
+theft ",3,8,2,14,3,,,
+,,,,,,,,
+Nevada ,,,,,,,,
+"- All Violent 
+Crimes",174,150,118,116,157,,,
+- Homicide,3,2,0,4,2,,,
+- Rape,13,16,9,13,21,,,
+- Robbery ,12,5,6,10,9,,,peak in 2017
+"- Aggravated 
+Assault",146,127,103,89,125,,,
+"- All Property 
+Crimes",620,423,424,342,395,,,
+- Arson,3,1,1,1,-,,,
+- Burglary,294,211,191,146,148,,,
+- Larceny-theft,304,205,226,189,239,,,peak in 2016
+"- Motor vehicle 
+theft ",22,7,7,7,8,,,peak in 2017
+,,,,,,,,
+Orange,,,,,,,,
+"- All Violent 
+Crimes",271,310,247,254,290,,,peak in 2018
+- Homicide,0,1,2,1,0,,,
+- Rape,16,36,11,24,6,,,
+- Robbery ,34,17,21,27,27,,,
+"- Aggravated 
+Assault",221,256,213,202,257,,,peak 2021 
+"- All Property 
+Crimes",1178,1089,881,909,963,,,
+- Arson,3,16,4,4,-,,,peak in 2018
+- Burglary,203,197,142,106,158,,,decline since 2012
+- Larceny-theft,751,747,642,682,644,,,
+"- Motor vehicle 
+theft ",224,145,97,121,161,,,peak in 2017
+,,,,,,,,
+Placer ,,,,,,,,
+"- All Violent 
+Crimes",302,223,183,220,265,,,
+- Homicide,3,1,3,2,1,,,
+- Rape,42,27,28,19,34,,,peak in 2017
+- Robbery ,33,31,13,24,22,,,
+"- Aggravated 
+Assault",224,164,139,175,208,,,
+"- All Property 
+Crimes",1447,1284,1077,952,950,,,
+- Arson,4,4,9,5,,,,
+- Burglary,380,353,278,247,220,,,decline since 2013
+- Larceny-theft,1026,878,769,674,699,,,
+"- Motor vehicle 
+theft ",41,53,30,31,31,,,
+,,,,,,,,
+Plumas ,,,,,,,,
+"- All Violent 
+Crimes",146,130,128,159,178,,,
+- Homicide,0,0,1,1,0,,,
+- Rape,23,14,9,18,15,,,
+- Robbery ,7,4,5,0,4,,,
+"- Aggravated 
+Assault",116,112,113,140,159,,,
+"- All Property 
+Crimes",293,312,294,282,250,,,
+- Arson,6,3,3,2,-,,,
+- Burglary,140,139,116,92,81,,,
+- Larceny-theft,152,165,167,186,162,,,
+"- Motor vehicle 
+theft ",1,8,11,4,7,,,
+,,,,,,,,
+Riverside ,,,,,,,,
+"- All Violent 
+Crimes",775,829,932,964,971,,,
+- Homicide,16,16,24,43,23,,,
+- Rape,48,45,37,32,40,,,peak 2016
+- Robbery ,161,167,179,149,180,,,
+"- Aggravated 
+Assault",550,601,692,740,728,,,
+"- All Property 
+Crimes",7700,7529,7220,6901,6621,,,
+- Arson,28,17,24,25,-,,,
+- Burglary,1711,1507,1454,1242,1128,,,
+- Larceny-theft,4579,4578,4320,3969,3879,,,
+"- Motor vehicle 
+theft ",1410,1444,1446,1690,1614,,,
+,,,,,,,,
+Sacramento ,,,,,,,,
+"- All Violent 
+Crimes",2612,2351,2408,2579,2517,,,
+- Homicide,32,28,36,48,37,,,
+- Rape,154,195,161,186,138,,,
+- Robbery ,880,617,685,560,539,,,
+"- Aggravated 
+Assault",1720,1511,1526,1785,1803,,,
+"- All Property 
+Crimes",9224,7909,8067,7753,7900,,,
+- Arson,58,75,67,90,-,,,
+- Burglary,2492,2119,2276,2228,1714,,,
+- Larceny-theft,6545,5586,5634,5349,6022,,,
+"- Motor vehicle 
+theft ",187,204,157,176,164,,,
+,,,,,,,,
+San Benito ,,,,,,,,
+"- All Violent 
+Crimes",51,51,33,33,76,,,
+- Homicide,1,0,0,1,1,,,
+- Rape,10,4,7,5,14,,,
+- Robbery ,6,8,2,2,5,,,
+"- Aggravated 
+Assault",34,39,24,25,56,,,
+"- All Property 
+Crimes",144,152,152,158,191,,,
+- Arson,1,0,0,0,-,,,
+- Burglary,50,62,34,41,52,,,
+- Larceny-theft,80,83,105,100,123,,,
+"- Motor vehicle 
+theft ",14,7,13,17,16,,,
+,,,,,,,,
+San Bernardino ,,,,,,,,
+"- All Violent 
+Crimes",862,1054,1503,1859,2149,,,"rising since 2017, 
+previous = slow decline"
+- Homicide,27,13,27,23,17,,,
+- Rape,76,139,115,104,114,,,
+- Robbery ,160,179,189,133,159,,,
+"- Aggravated 
+Assault",599,723,1172,1599,1859,,,
+"- All Property 
+Crimes",5076,4809,3945,3251,3558,,,
+- Arson,70,65,53,72,-,,,
+- Burglary,1358,1357,1142,902,795,,,decline since 2012 
+- Larceny-theft,2556,2329,1875,1421,1806,,,
+"- Motor vehicle 
+theft ",1162,1123,928,928,957,,,
+,,,,,,,,
+San Diego ,,,,,,,,
+"- All Violent 
+Crimes",1486,1523,1499,1435,1414,,,
+- Homicide,18,13,10,19,19,,,
+- Rape,119,114,104,100,62,,,
+- Robbery ,232,225,224,182,145,,,
+"- Aggravated 
+Assault",1117,1171,1161,1134,1188,,,
+"- All Property 
+Crimes",4548,4533,4300,3894,9313,,,
+- Arson,32,48,30,38,80,,,
+- Burglary,1075,950,901,742,808,,,
+- Larceny-theft,2645,2768,2498,2318,2338,,,
+"- Motor vehicle 
+theft ",828,815,901,834,1048,,,
+,,,,,,,,
+San Francisco ,,,,,,,,
+"- All Violent 
+Crimes",6497,6401,6080,4821,4887,,,
+- Homicide,56,46,41,48,56,,,
+- Rape,449,417,371,202,205,,,
+- Robbery ,"3,256",3208,3083,2387,2245,,,
+"- Aggravated 
+Assault","2,694",2662,2538,2161,2381,,,
+"- Human 
+Trafficking-Sex
+Act",40,108,47,23,29,,,
+"- Human 
+Trafficking-Involuntary
+Serv.",2,0,0,0,0,,,
+"- All Property 
+Crimes","57,067","58,817","57,081","43,809","44,702",,,
+- Arson,257,303,285,411,387,,,
+- Burglary,"5,121",5605,4875,7400,7246,,,
+- Larceny-theft,"46,732","42,200","41,450",25190,31414,,,
+"- Motor vehicle 
+theft ","4,957","4,308","4,391",5987,6042,,,
+,,,,,,,,
+San Joaquin ,,,,,,,,
+"- All Violent 
+Crimes",746,757,903,822,777,,,
+- Homicide,5,6,5,16,12,,,
+- Rape,25,29,35,18,32,,,
+- Robbery ,141,179,162,150,122,,,
+"- Aggravated 
+Assault",575,543,701,638,611,,,
+"- All Property 
+Crimes",2961,543,701,638,2446,,,
+- Arson,27,19,24,44,-,,,
+- Burglary,751,779,719,600,541,,,
+- Larceny-theft,2068,1823,1589,1880,1749,,,
+"- Motor vehicle 
+theft ",142,127,131,172,156,,,
+,,,,,,,,
+San Luis Obispo ,,,,,,,,
+"- All Violent 
+Crimes",137,115,181,260,213,,,
+- Homicide,1,1,5,1,0,,,
+- Rape,21,23,26,28,22,,,
+- Robbery ,16,7,5,12,11,,,
+"- Aggravated 
+Assault",99,84,145,219,180,,,
+"- All Property 
+Crimes",1116,1083,963,1065,1067,,,
+- Arson,5,4,7,6,-,,,
+- Burglary,400,394,331,314,380,,,
+- Larceny-theft,691,670,614,718,653,,,
+"- Motor vehicle 
+theft ",25,19,18,33,34,,,
+,,,,,,,,
+San Mateo ,,,,,,,,
+"- All Violent 
+Crimes",311,310,324,319,279,,,
+- Homicide,2,3,3,2,2,,,
+- Rape,65,77,71,85,71,,,
+- Robbery ,70,78,62,74,51,,,
+"- Aggravated 
+Assault",174,152,188,158,155,,,
+"- All Property 
+Crimes",3109,2840,3245,2896,2482,,,
+- Arson,14,11,5,13,-,,,
+- Burglary,337,335,297,334,365,,,
+- Larceny-theft,2411,2124,2612,2172,1816,,,
+"- Motor vehicle 
+theft ",361,381,336,390,301,,,
+,,,,,,,,
+Santa Barbara ,,,,,,,,
+"- All Violent 
+Crimes",272,229,232,225,225,,,
+- Homicide,2,3,2,0,5,,,
+- Rape,43,25,17,34,34,,,peak 2016
+- Robbery ,24,22,26,32,22,,,
+"- Aggravated 
+Assault",203,179,187,159,164,,,
+"- All Property 
+Crimes",1499,1208,1257,1616,1563,,,
+- Arson,6,3,8,15,-,,,
+- Burglary,421,336,305,277,375,,,
+- Larceny-theft,1054,848,938,1279,1136,,,
+"- Motor vehicle 
+theft ",24,24,14,60,52,,,
+,,,,,,,,
+Santa Clara,,,,,,,,
+"- All Violent 
+Crimes",383,321,356,323,255,,,
+- Homicide,2,1,2,1,1,,,
+- Rape,43,41,40,46,42,,,
+- Robbery ,33,31,25,26,32,,,
+"- Aggravated 
+Assault",305,248,289,250,180,,,
+"- All Property 
+Crimes",1271,1421,1518,1296,1102,,,
+- Arson,1,0,4,0,-,,,
+- Burglary,229,213,178,188,162,,,
+- Larceny-theft,834,974,1154,854,743,,,
+"- Motor vehicle 
+theft ",208,234,186,254,197,,,
+,,,,,,,,
+Santa Cruz ,,,,,,,,
+"- All Violent 
+Crimes",288,297,331,315,268,,,
+- Homicide,0,3,5,6,3,,,
+- Rape,41,34,58,29,34,,,
+- Robbery ,42,45,34,39,23,,,
+"- Aggravated 
+Assault",205,215,234,241,208,,,
+"- All Property 
+Crimes",1794,1807,1630,1566,1278,,,
+- Arson,9,10,7,9,-,,,
+- Burglary,427,432,439,348,241,,,
+- Larceny-theft,1349,1354,1174,1172,1004,,,
+"- Motor vehicle 
+theft ",18,21,17,46,33,,,
+,,,,,,,,
+Shasta ,,,,,,,,
+"- All Violent 
+Crimes",527,477,386,393,27,,,
+- Homicide,4,10,4,7,0,,,
+- Rape,48,44,41,22,1,,,
+- Robbery ,24,19,34,23,0,,,
+"- Aggravated 
+Assault",451,404,307,341,26,,,
+"- All Property 
+Crimes",944,972,824,666,50,,,
+- Arson,48,40,12,5,-,,,
+- Burglary,431,477,415,303,15,,,
+- Larceny-theft,468,446,332,319,35,,,
+"- Motor vehicle 
+theft ",45,49,77,44,0,,,
+,,,,,,,,
+Sierra ,,,,,,,,
+"- All Violent 
+Crimes",5,5,1,4,5,,,
+- Homicide,0,0,0,0,0,,,
+- Rape,0,1,0,0,0,,,
+- Robbery ,1,0,0,0,0,,,
+"- Aggravated 
+Assault",4,4,1,4,5,,,
+"- All Property 
+Crimes",24,22,31,17,35,,,
+- Arson,0,0,0,0,-,,,
+- Burglary,12,9,15,7,13,,,
+- Larceny-theft,11,11,16,10,20,,,
+"- Motor vehicle 
+theft ",1,2,0,0,2,,,
+,,,,,,,,
+Siskiyou ,,,,,,,,
+"- All Violent 
+Crimes",54,73,70,98,90,,,
+- Homicide,3,2,5,2,2,,,
+- Rape,4,6,2,13,10,,,
+- Robbery ,3,0,2,4,8,,,
+"- Aggravated 
+Assault",44,65,61,79,70,,,
+"- All Property 
+Crimes",241,172,146,154,120,,,
+- Arson,1,0,1,2,-,,,
+- Burglary,146,101,69,69,56,,,
+- Larceny-theft,85,56,69,77,54,,,
+"- Motor vehicle 
+theft ",10,15,8,8,10,,,
+,,,,,,,,
+Solano ,,,,,,,,
+"- All Violent 
+Crimes",105,147,109,115,97,,,
+- Homicide,1,2,1,4,2,,,
+- Rape,9,11,13,15,17,,,
+- Robbery ,15,14,18,12,7,,,
+"- Aggravated 
+Assault",80,120,77,84,71,,,
+"- All Property 
+Crimes",368,396,377,419,330,,,
+- Arson,8,14,7,14,-,,,
+- Burglary,164,153,110,126,78,,,
+- Larceny-theft,139,140,192,204,168,,,
+"- Motor vehicle 
+theft ",65,103,75,89,84,,,
+,,,,,,,,
+Sonoma ,,,,,,,,
+"- All Violent 
+Crimes",636,516,497,586,414,,,2nd largest peak in 2017
+- Homicide,6,4,1,1,1,,,
+- Rape,81,64,45,56,58,,,
+- Robbery ,60,42,36,39,31,,,
+"- Aggravated 
+Assault",489,406,415,490,328,,,
+"- All Property 
+Crimes",1149,1080,1089,986,947,,,
+- Arson,15,13,22,26,-,,,
+- Burglary,388,340,350,357,206,,,
+- Larceny-theft,753,734,733,621,725,,,
+"- Motor vehicle 
+theft ",8,6,6,8,16,,,
+,,,,,,,,
+Stanislaus ,,,,,,,,
+"- All Violent 
+Crimes",398,435,370,436,344,,,
+- Homicide,16,13,8,7,10,,,
+- Rape,26,31,17,20,21,,,
+- Robbery ,126,133,90,117,76,,,
+"- Aggravated 
+Assault",230,258,255,292,237,,,
+"- All Property 
+Crimes",1647,1735,1602,1171,1054,,,
+- Arson,11,18,13,8,-,,,
+- Burglary,570,614,559,365,323,,,
+- Larceny-theft,1013,1053,1000,764,684,,,
+"- Motor vehicle 
+theft ",64,68,43,42,47,,,
+,,,,,,,,
+Sutter ,,,,,,,,
+"- All Violent 
+Crimes",87,64,77,69,86,,,
+- Homicide,1,0,1,1,3,,,
+- Rape,9,8,4,4,8,,,
+- Robbery ,5,2,13,12,9,,,
+"- Aggravated 
+Assault",72,54,59,52,66,,,
+"- All Property 
+Crimes",600,591,576,530,573,,,
+- Arson,2,1,1,2,-,,,
+- Burglary,230,184,167,145,114,,,
+- Larceny-theft,303,367,350,318,383,,,
+"- Motor vehicle 
+theft ",67,40,59,67,76,,,
+,,,,,,,,
+Tehama ,,,,,,,,
+"- All Violent 
+Crimes",89,62,95,161,148,,,
+- Homicide,8,1,2,5,1,,,
+- Rape,22,12,14,14,27,,,
+- Robbery ,10,6,12,12,14,,,
+"- Aggravated 
+Assault",49,43,67,130,106,,,
+"- All Property 
+Crimes",432,452,472,384,310,,,
+- Arson,0,5,0,1,-,,,
+- Burglary,212,197,179,131,115,,,
+- Larceny-theft,206,244,278,238,183,,,
+"- Motor vehicle 
+theft ",14,11,15,15,12,,,
+,,,,,,,,
+Trinity ,,,,,,,,
+"- All Violent 
+Crimes",75,77,61,82,83,,,
+- Homicide,1,2,2,2,1,,,
+- Rape,5,11,10,3,5,,,
+- Robbery ,8,7,9,7,7,,,
+"- Aggravated 
+Assault",61,57,40,70,70,,,
+"- All Property 
+Crimes",179,194,190,147,154,,,
+- Arson,1,6,2,4,-,,,
+- Burglary,84,89,83,56,71,,,
+- Larceny-theft,94,102,101,86,82,,,
+"- Motor vehicle 
+theft ",1,3,6,5,1,,,
+,,,,,,,,
+Tulare ,,,,,,,,
+"- All Violent 
+Crimes",254,372,334,344,346,,,
+- Homicide,2,13,9,9,16,,,
+- Rape,12,40,30,29,34,,,
+- Robbery ,66,60,64,65,45,,,
+"- Aggravated 
+Assault",164,259,231,241,251,,,
+"- All Property 
+Crimes",1703,1976,1893,1884,1762,,,
+- Arson,15,0,0,0,-,,,
+- Burglary,284,627,637,603,526,,,
+- Larceny-theft,1008,1349,1254,1260,1203,,,
+"- Motor vehicle 
+theft ",411,0,2,21,33,,,
+,,,,,,,,
+Tuolumne ,,,,,,,,
+"- All Violent 
+Crimes",173,169,169,205,286,,,
+- Homicide,2,2,2,0,1,,,
+- Rape,39,52,62,75,120,,,
+- Robbery ,13,11,7,12,12,,,
+"- Aggravated 
+Assault",119,104,98,118,153,,,
+"- All Property 
+Crimes",622,555,669,603,559,,,peak in 2012
+- Arson,6,3,6,11,-,,,
+- Burglary,322,272,306,268,248,,,
+- Larceny-theft,294,271,355,328,298,,,
+"- Motor vehicle 
+theft ",6,12,8,7,13,,,
+,,,,,,,,
+Ventura,,,,,,,,
+"- All Violent 
+Crimes",176,141,159,98,104,,,peak in 2017
+- Homicide,2,3,5,1,0,,,
+- Rape,30,19,18,20,16,,,peak in 2015
+- Robbery ,26,21,25,13,14,,,
+"- Aggravated 
+Assault",118,98,111,64,74,,,
+"- All Property 
+Crimes",817,697,543,730,742,,,
+- Arson,8,7,13,13,-,,,
+- Burglary,194,154,112,129,131,,,
+- Larceny-theft,531,473,363,517,545,,,
+"- Motor vehicle 
+theft ",92,70,68,84,66,,,
+,,,,,,,,
+Yolo ,,,,,,,,
+"- All Violent 
+Crimes",56,81,69,64,58,,,peak in 2015
+- Homicide,2,2,0,2,0,,,
+- Rape,4,7,8,5,5,,,peak in 2015
+- Robbery ,10,7,6,4,4,,,
+"- Aggravated 
+Assault",40,65,55,53,49,,,
+"- All Property 
+Crimes",282,287,294,266,346,,,
+- Arson,3,2,1,2,-,,,
+- Burglary,99,82,79,87,81,,,
+- Larceny-theft,166,194,204,157,244,,,
+"- Motor vehicle 
+theft ",17,11,11,12,21,,,
+,,,,,,,,
+Yuba,,,,,,,,
+"- All Violent 
+Crimes",224,225,204,256,217,,,
+- Homicide,2,7,5,2,4,,,
+- Rape,17,28,21,17,15,,,
+- Robbery ,37,45,37,40,40,,,
+"- Aggravated 
+Assault",168,145,141,197,158,,,
+"- All Property 
+Crimes",1156,912,847,880,730,,,
+- Arson,16,21,11,24,-,,,
+- Burglary,433,338,316,247,170,,,
+- Larceny-theft,718,560,520,608,536,,,"peak in 2012, 
+relative decline since "
+"- Motor vehicle 
+theft ",5,14,11,25,24,,,
