@@ -304,14 +304,3 @@ class PopulationSimulationFactory:
                         f"All disagregation axis must be included in the input dataframe columns\n"
                         f"Expected: {data_inputs.disaggregation_axes}, Actual: {df.columns}"
                     )
-
-        if not data_inputs.total_population_data.empty:
-            if (
-                user_inputs.start_time_step
-                not in data_inputs.total_population_data.time_step.values
-            ):
-                raise ValueError(
-                    f"Start time must be included in population data input\n"
-                    f"Expected: {user_inputs.start_time_step}, "
-                    f"Actual: {data_inputs.total_population_data.time_step.unique()}"
-                )

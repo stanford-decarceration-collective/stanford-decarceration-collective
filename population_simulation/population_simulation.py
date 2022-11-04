@@ -186,8 +186,8 @@ class PopulationSimulation:
         ]
         ts_population_data = (
             ts_population_data.groupby(population_df_sort_indices)
-            .sum()
             .total_population
+            .sum()
         )
 
         subgroup_populations = self._collect_subsimulation_populations()
