@@ -10,6 +10,7 @@ numpy = "*"
 pandas = "*"
 pandas_gbq = "*"
 pyyaml = "*"
+selenium = "*"
 statsmodels = "*"
 
 [dev-packages]
