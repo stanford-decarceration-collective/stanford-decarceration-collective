@@ -4,3 +4,6 @@
 
 # PyCharm files
 .idea/
+
+# Geckodriver
+geckodriver.log
