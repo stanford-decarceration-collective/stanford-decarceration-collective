@@ -12,22 +12,11 @@ the cost differential can be computed.
 ## Where things live
 **Config Files**
 
-These are yaml files detailing the inputs for state-specific projections.
-- For micro-simulations these live in `recidiviz/calculator/modeling/population_projection/microsimulations/`
-- For macro-simulations these live in `recidiviz/calculator/modeling/population_projection/state/` (inside state-specific folders)
+These are yaml files detailing the inputs for state-specific projections. These live in `./state/` (inside state-specific folders)
 
 **Modeling**
 
-The classes and methods used for modeling are in `recidiviz/calculator/modeling/population_projection/` and are often accessed through Jupyter notebooks, such as the ones in `recidiviz/calculator/modeling/population_projection/notebooks/`
-
-**Data Inputs**
-
-The type of input depends on whether we're doing a MacroSim or MicroSim. MacroSims are done on aggregated data, while MicroSims are done on case-level data. 
-
-For MacroSims, `recidiviz/calculator/modeling/population_projection/state/{state}/historical_data_{state}.py` files contain code to wrangle publicly available data and to upload it for modeling.
-The underlying data imported by these files may exist in the Spark Google Drive folder.
-
-For MicroSims, `recidiviz-data/recidiviz/calculator/query/state/views/population_projection/` contain views that feed into the population projections.
+The classes and methods used for modeling are in the main directory and are often accessed through Jupyter notebooks, such as the ones in `./notebooks/`
 
 ## Other Resources
 
@@ -41,4 +30,3 @@ The Spark Google Drive folder contains a lot of additional resources including:
 This is basically just the entire recidiviz.calculator.population_projection.modeling directory copied over from [pulse-data](https://github.com/Recidiviz/pulse-data). There are a few specifics of the move worth mentioning:
 * We took recidiviz.utils.yaml_dict and moved it into our utils folder
 * We didn't take the microsimulations folder or any of the Recidiviz notebooks
-* 

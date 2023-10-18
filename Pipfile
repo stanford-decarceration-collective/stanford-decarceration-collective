@@ -7,7 +7,7 @@ name = "pypi"
 jupyter = "*"
 matplotlib = "*"
 numpy = "*"
-pandas = "*"
+pandas = "<2.0.0"
 pandas_gbq = "*"
 pyyaml = "*"
 statsmodels = "*"
@@ -16,4 +16,4 @@ selenium = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"

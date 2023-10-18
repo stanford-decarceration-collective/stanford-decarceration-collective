@@ -41,8 +41,7 @@ def transitions_uniform(
     prob: float,
     round_digits: int = SIG_FIGS,
     max_periods: int = 119,
-    disagg_label: str = "crime_type",
-    disagg_value: str = "x",
+    simulation_group: str = "x",
 ) -> pd.DataFrame:
     """
     Creates dataframe with transitions table probabilities
@@ -65,10 +64,7 @@ def transitions_uniform(
                     0.5 * `mean_los`. Must be odd (why? Because with uniform dist,
                     only possible to maintain expected LOS with odd max_periods).
 
-    disagg_label    String label for the disaggregation axis name, default is
-                    'crime_type'
-
-    disagg_value    String label for disaggregation axis, default is 'x'.
+    simulation_group    String label for simulation_group field, default is 'x'.
 
     Example
     -------
@@ -77,7 +73,7 @@ def transitions_uniform(
     transitions_uniform('parole', 'release',
                         12, 0.8, 5, 119, 'x') produces a dataframe with:
 
-    compartment, outflow_to, crime_type, compartment_duration, total_population
+    compartment, outflow_to, simulation_group, compartment_duration, cohort_portion
     parole,release,x,1,0.03478
     parole,release,x,2,0.03478
     ...
@@ -90,7 +86,7 @@ def transitions_uniform(
 
     # -- assertions --
     # check types
-    for s in [c_from, c_to, disagg_label, disagg_value]:
+    for s in [c_from, c_to, simulation_group]:
         if not isinstance(s, str):
             raise ValueError(f"{s} not type str.")
     for i in [mean_los, round_digits, max_periods]:
@@ -127,9 +123,9 @@ def transitions_uniform(
         {
             "compartment": c_from,
             "outflow_to": c_to,
-            disagg_label: disagg_value,
+            "simulation_group": simulation_group,
             "compartment_duration": months,
-            "total_population": [prob_u] * len(months),
+            "cohort_portion": [prob_u] * len(months),
         },
         index=range(len(months)),
     )
@@ -316,8 +312,7 @@ def transitions_lognorm(
     p_x_months: float,
     last_month: int = 120,
     round_digits: int = SIG_FIGS,
-    disagg_label: str = "crime_type",
-    disagg_value: str = "x",
+    simulation_group: str = "x",
     plot: bool = False,
 ) -> pd.DataFrame:
     """
@@ -348,9 +343,7 @@ def transitions_lognorm(
 
     round_digits  Number of places after decimal to round transition probabilities
 
-    disagg_label  String label for the disaggregation axis name, default is 'crime_type'
-
-    disagg_value  String label for disaggregation axis, default is 'x'.
+    simulation_group  String label for simulation_group field, default is 'x'.
 
     plot          If True, plots transition probabilities over time
 
@@ -363,9 +356,9 @@ def transitions_lognorm(
     mean, std = get_lognorm_params() # 20.0, 1.5
 
     transitions_lognorm('parole', 'release', mean, std, x_months, p_x_months,
-                        120, 5, 'crime_type', 'x', False) produces a dataframe with:
+                        120, 5, 'x', False) produces a dataframe with:
 
-    compartment, outflow_to, crime_type, compartment_duration, total_population
+    compartment, outflow_to, simulation_group, compartment_duration, cohort_portion
     parole,release,x,1,0.01838
     parole,release,x,2,0.02078
     ...
@@ -375,7 +368,7 @@ def transitions_lognorm(
 
     # -- assertions --
     # check types
-    for s in [c_from, c_to, disagg_label, disagg_value]:
+    for s in [c_from, c_to, simulation_group]:
         if not isinstance(s, str):
             raise ValueError(f"{s} not type str.")
     for i in [x_months, last_month, round_digits]:
@@ -420,9 +413,9 @@ def transitions_lognorm(
         {
             "compartment": c_from,
             "outflow_to": c_to,
-            disagg_label: disagg_value,
+            "simulation_group": simulation_group,
             "compartment_duration": months,
-            "total_population": pdf,
+            "cohort_portion": pdf,
         },
         index=range(len(months)),
     )
@@ -451,8 +444,7 @@ def transitions_interpolation(
     pdf_list: Sequence[float],
     year_list: Optional[Sequence[int]] = None,
     round_digits: int = SIG_FIGS,
-    disagg_label: str = "crime_type",
-    disagg_value: str = "x",
+    simulation_group: str = "x",
     uniform: bool = False,
     plot: bool = False,
 ) -> pd.DataFrame:
@@ -484,8 +476,8 @@ def transitions_interpolation(
     round_digits : int
         Number of places after decimal to round transition probabilities
 
-    disagg_label : str
-        String label for disaggregation axis, default is 'x'.
+    simulation_group : str
+        String label for simulation_group field, default is 'x'.
 
     uniform : bool
         If True, use uniform transitions within year, default is False.
@@ -580,9 +572,9 @@ def transitions_interpolation(
         {
             "compartment": c_from,
             "outflow_to": c_to,
-            disagg_label: disagg_value,
+            "simulation_group": simulation_group,
             "compartment_duration": months,
-            "total_population": pdf_output,
+            "cohort_portion": pdf_output,
         },
         index=range(len(months)),
     )
@@ -611,14 +603,15 @@ def transitions_interpolation(
 
 
 def yearly_to_monthly_data(
-    df: pd.DataFrame, split_total_population: bool = True
+    df: pd.DataFrame, population_col: str, split_population: bool = True
 ) -> pd.DataFrame:
     """
-    Convert yearly outflows or total_population data to monthly granularity.
+    Convert yearly outflows or population data to monthly granularity.
     Same as transitions_interpolation with `uniform`=True, but takes a df instead of raw data.
-    `df` should be the df of yearly data. Must include `total_population` and `time_step` as columns.
-    `split_total_population` tells the method whether to divide up the `total_population` column by month.
-        Generally, this should be true for outflows_data and false for total_population_data.
+    `df` should be the df of yearly data.
+    `population_col` should be the name of the `population` column in `df`.
+    `split_population` tells the method whether to divide up the population column by month.
+        Generally, this should be true for admissions_data and false for population_data.
     """
     final_df = pd.DataFrame()
     for ts_original in df.time_step.unique():
@@ -626,8 +619,8 @@ def yearly_to_monthly_data(
         for ts_month in range(12):
             month_df = df_ts.copy()
             month_df.time_step = 12 * month_df.time_step + ts_month
-            if split_total_population:
-                month_df.total_population /= 12
+            if split_population:
+                month_df[population_col] /= 12
             final_df = pd.concat([final_df, month_df])
     return final_df
 

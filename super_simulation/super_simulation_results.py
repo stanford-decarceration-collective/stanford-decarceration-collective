@@ -14,7 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # =============================================================================
-"""constants used in handling transition probabilities in population projection modeling"""
+"""Highest level simulation results container -- holds outputs from all simulation scenarios"""
 
-SIG_FIGS = 7
-MIN_POSSIBLE_POLICY_TIME_STEP = -9999
+
+class SuperSimulationResults:
+    """Manage the outputs from SuperSminulation and its subsims"""
+
+    def __init__(self) -> None:
+        return

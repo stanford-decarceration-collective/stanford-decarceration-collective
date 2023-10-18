@@ -17,7 +17,7 @@
 """SuperSimulation composed object for initializing simulations."""
 import logging
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -31,6 +31,7 @@ from super_simulation.initializer import (
     SimulationInputData,
     UserInputs,
 )
+from super_simulation.super_simulation_results import SuperSimulationResults
 from super_simulation.time_converter import TimeConverter
 
 
@@ -41,6 +42,7 @@ class Simulator:
         self.pop_simulations: Dict[str, PopulationSimulation] = {}
         self.microsim = microsim
         self.time_converter = time_converter
+        self.results: Optional[SuperSimulationResults] = None
 
     def get_population_simulations(self) -> Dict[str, PopulationSimulation]:
         if not self.pop_simulations:
@@ -51,7 +53,7 @@ class Simulator:
         self,
         user_inputs: UserInputs,
         data_inputs: SimulationInputData,
-        first_relevant_ts: int,
+        first_relevant_time_step: int,
         policy_list: List[SparkPolicy],
         output_compartment: str,
     ) -> pd.DataFrame:
@@ -63,17 +65,34 @@ class Simulator:
         `output_compartment` should be the primary compartment to be graphed at the end (doesn't affect calculation)
         `cost_multipliers` should be a df with one column per disaggregation axis and a column `multiplier`
         """
+        if output_compartment not in data_inputs.compartments_architecture.keys():
+            raise ValueError(
+                f"Output compartment '{output_compartment}' not in compartment architecture \
+                {data_inputs.compartments_architecture.keys()}"
+            )
+
+        simulation_groups = list(data_inputs.transitions_data.simulation_group.unique())
+        for policy in policy_list:
+            if policy.simulation_group not in simulation_groups:
+                raise ValueError(
+                    f"Subgroup '{policy.simulation_group}' in policy function not found in simulation groups \
+                    {simulation_groups}"
+                )
+
         self._reset_pop_simulations()
 
-        self.pop_simulations["policy"] = self._build_population_simulation(
-            user_inputs, data_inputs, policy_list, first_relevant_ts
-        )
         self.pop_simulations["control"] = self._build_population_simulation(
-            user_inputs, data_inputs, [], first_relevant_ts
+            user_inputs, data_inputs, [], first_relevant_time_step
+        )
+
+        self.pop_simulations["policy"] = self._build_population_simulation(
+            user_inputs, data_inputs, policy_list, first_relevant_time_step
         )
 
         self.pop_simulations["policy"].simulate_policies()
         self.pop_simulations["control"].simulate_policies()
+
+        self.super_sim_results = SuperSimulationResults()
 
         results = {
             scenario: simulation.get_population_projections()
@@ -88,6 +107,7 @@ class Simulator:
         self._log_predicted_admissions_warnings()
 
         self._graph_results(user_inputs, results, output_compartment)
+        # self.graph_outflow_results()
         return self._format_simulation_results(user_inputs, collapse_compartments=False)
 
     def simulate_baseline(
@@ -95,7 +115,7 @@ class Simulator:
         user_inputs: UserInputs,
         data_inputs: SimulationInputData,
         display_compartments: List[str],
-        first_relevant_ts: int,
+        first_relevant_time_step: int,
         reset: bool = True,
     ) -> None:
         """
@@ -107,9 +127,9 @@ class Simulator:
         if reset:
             self._reset_pop_simulations()
 
-        if first_relevant_ts > user_inputs.start_time_step:
+        if first_relevant_time_step > user_inputs.start_time_step:
             raise ValueError(
-                f"first_relevant_ts ({first_relevant_ts}) must be less than start_time_step "
+                f"first_relevant_time_step ({first_relevant_time_step}) must be less than start_time_step "
                 f"({user_inputs.start_time_step})"
             )
 
@@ -117,7 +137,7 @@ class Simulator:
         self.pop_simulations[
             "baseline_projections"
         ] = self._build_population_simulation(
-            user_inputs, data_inputs, [], first_relevant_ts
+            user_inputs, data_inputs, [], first_relevant_time_step
         )
 
         self.pop_simulations["baseline_projections"].simulate_policies()
@@ -129,7 +149,7 @@ class Simulator:
             simulation_results = self._format_simulation_results(
                 user_inputs, collapse_compartments=True
             )
-            display_results = pd.DataFrame(index=simulation_results.year.unique())
+            display_results = pd.DataFrame(index=simulation_results.index.unique())
             for comp in display_compartments:
                 if comp not in simulation_results.compartment.unique():
                     logging.warning(
@@ -139,10 +159,10 @@ class Simulator:
                 else:
                     relevant_results = simulation_results[
                         (simulation_results.compartment == comp)
-                        & (user_inputs.start_time_step <= simulation_results.year)
+                        & (user_inputs.start_time_step <= simulation_results.index)
                     ]
                     display_results[comp] = relevant_results[
-                        "baseline_projections_total_population"
+                        "baseline_projections_compartment_population"
                     ]
 
             display_results.plot(
@@ -156,7 +176,7 @@ class Simulator:
         self,
         user_inputs: UserInputs,
         run_date_data_inputs: Dict[datetime, SimulationInputData],
-        run_date_first_relevant_ts: Dict[datetime, int],
+        run_date_first_relevant_time_step: Dict[datetime, int],
         projection_time_steps_override: Optional[int],
     ) -> None:
         self._reset_pop_simulations()
@@ -167,10 +187,13 @@ class Simulator:
 
         for start_date, data_inputs in run_date_data_inputs.items():
             print(start_date)
-            user_inputs.start_time_step = run_date_first_relevant_ts[start_date]
+            user_inputs.start_time_step = run_date_first_relevant_time_step[start_date]
             simulation_name = f"baseline_{start_date.date()}"
             self.pop_simulations[simulation_name] = self._build_population_simulation(
-                user_inputs, data_inputs, [], run_date_first_relevant_ts[start_date]
+                user_inputs,
+                data_inputs,
+                [],
+                run_date_first_relevant_time_step[start_date],
             )
 
             self.pop_simulations[simulation_name].simulate_policies()
@@ -191,24 +214,47 @@ class Simulator:
         """
         self._reset_pop_simulations()
 
-        for ts in np.arange(range_start, range_end, step_size):
+        for time_step in np.arange(range_start, range_end, step_size):
             self.pop_simulations[
-                f"backfill_period_{ts}_time_steps"
+                f"backfill_period_{time_step}_time_steps"
             ] = self._build_population_simulation(
                 user_inputs,
                 data_inputs,
                 [],
-                first_relevant_ts=user_inputs.start_time_step - ts,
+                first_relevant_time_step=user_inputs.start_time_step - time_step,
             )
-            self.pop_simulations[f"backfill_period_{ts}_time_steps"].simulate_policies()
+            self.pop_simulations[
+                f"backfill_period_{time_step}_time_steps"
+            ].simulate_policies()
 
         # log warnings from ARIMA model
         self._log_predicted_admissions_warnings()
 
         return self.pop_simulations
 
-    def get_sub_group_ids_dict(self) -> Dict[str, Dict[str, Any]]:
-        return list(self.pop_simulations.values())[0].sub_group_ids_dict
+    def get_simulation_groups(self) -> List[str]:
+        return list(list(self.pop_simulations.values())[0].sub_simulations.keys())
+
+    def graph_outflow_results(self) -> None:
+        outflow_sims = {
+            scenario: simulation.get_outflows(collapse_compartments=True).reset_index()
+            for scenario, simulation in self.pop_simulations.items()
+        }
+        outflows = pd.concat(outflow_sims.values(), ignore_index=False)
+        outflows = outflows.pivot(
+            index="time_step",
+            columns=["compartment", "simulation", "outflow_to"],
+            values="cohort_population",
+        )
+        outflows.plot()
+
+        for comp in ["parole", "pretrial", "prison", "prisonrev"]:
+            comp_outflows = (
+                outflows.xs(comp, level="compartment", axis=1).fillna(0).loc[-24:]
+            )
+            comp_outflows = comp_outflows.loc[(comp_outflows != 0).any(axis=1)]
+            comp_outflows.plot()
+            plt.title(comp)
 
     def _graph_results(
         self,
@@ -224,15 +270,14 @@ class Simulator:
             simulation_results["compartment"] == output_compartment
         ]
         y_columns = [
-            f"{simulation_name}_total_population"
+            f"{simulation_name}_compartment_population"
             for simulation_name in simulations.keys()
         ]
         display_results.plot(
-            x="year",
             y=y_columns,
         )
-        plt.title(f"Policy Impact on {output_compartment} Population")
-        plt.ylabel(f"Estimated\n{output_compartment} Population")
+        plt.title(f"Policy Impact on {output_compartment.title()} Population")
+        plt.ylabel(f"Estimated\n{output_compartment.title()} Population")
         plt.legend(loc="lower left")
 
         y_max = 1.1 * display_results[y_columns].max().max()
@@ -252,7 +297,7 @@ class Simulator:
             results = results.rename(
                 {
                     "time_step": "year",
-                    "total_population": f"{scenario}_total_population",
+                    "compartment_population": f"{scenario}_compartment_population",
                 },
                 axis=1,
             )
@@ -266,11 +311,16 @@ class Simulator:
                 )
 
         if collapse_compartments:
+            results_columns = [
+                col
+                for col in simulation_results.select_dtypes(include=[float]).columns
+                if col != "year"
+            ]
             simulation_results = simulation_results.groupby(
                 ["compartment", "year"], as_index=False
-            ).sum()
+            )[results_columns].sum()
 
-        simulation_results.index = simulation_results.year
+        simulation_results = simulation_results.set_index("year")
 
         return simulation_results
 
@@ -295,8 +345,9 @@ class Simulator:
                 for admissions_predictor in compartment.admissions_predictors.values():
                     while admissions_predictor.warnings:
                         w = admissions_predictor.warnings.pop()
-                        if w not in warnings:
-                            warnings.append(w)
+                        compartment_warning = f"{compartment.tag} {w}"
+                        if compartment_warning not in warnings:
+                            warnings.append(compartment_warning)
         # now log unique warnings
         while warnings:
             w = warnings.pop()
@@ -307,11 +358,11 @@ class Simulator:
         user_inputs: UserInputs,
         data_inputs: SimulationInputData,
         policy_list: List[SparkPolicy],
-        first_relevant_ts: int,
+        first_relevant_time_step: int,
     ) -> PopulationSimulation:
         return PopulationSimulationFactory.build_population_simulation(
             user_inputs=user_inputs,
             policy_list=policy_list,
-            first_relevant_ts=first_relevant_ts,
+            first_relevant_time_step=first_relevant_time_step,
             data_inputs=data_inputs,
         )

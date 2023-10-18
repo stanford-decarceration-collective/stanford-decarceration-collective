@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # =============================================================================
 """SuperSimulation composed object for outputting simulation results."""
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 
@@ -79,8 +79,6 @@ class Exporter:
         simulation_tag: Optional[str],
         output_data: Dict[str, pd.DataFrame],
         cost_multipliers: pd.DataFrame,
-        sub_group_ids_dict: Dict[str, Dict[str, Any]],
-        disaggregation_axes: List[str],
     ) -> Dict[str, pd.DataFrame]:
         """Format then upload policy simulation results to Big Query."""
         # TODO(#6633): incorporate excluded populations into policy simulation upload for microsimulations
@@ -90,14 +88,14 @@ class Exporter:
             spending_diff_non_cumulative,
         ) = self._get_output_metrics(
             output_data["policy_simulation"],
-            sub_group_ids_dict,
-            disaggregation_axes,
             cost_multipliers,
         )
         aggregate_output_data = (
             output_data["policy_simulation"]
-            .reset_index(drop=True)
-            .groupby(["year", "compartment"])
+            .reset_index(drop=False)
+            .groupby(["year", "compartment"])[
+                ["policy_compartment_population", "control_compartment_population"]
+            ]
             .sum()
             .reset_index()
         )
@@ -159,9 +157,9 @@ class Exporter:
             )
 
         scaling_columns = [
-            "total_population",
-            "total_population_min",
-            "total_population_max",
+            "compartment_population",
+            "compartment_population_min",
+            "compartment_population_max",
         ]
         output_data.loc[:, scaling_columns] = output_data.loc[
             :, scaling_columns
@@ -191,7 +189,7 @@ class Exporter:
         for _index, row in excluded_pop.iterrows():
             # TODO(#9720): make this more generalized/customizable for other states
             if row.compartment == "INCARCERATION - ALL":
-                compartment_total_pop = total_pop[
+                compartment_pop = total_pop[
                     total_pop.compartment.isin(
                         [
                             "INCARCERATION - GENERAL",
@@ -200,16 +198,16 @@ class Exporter:
                             "INCARCERATION - PAROLE_BOARD_HOLD",
                         ]
                     )
-                ].total_population.sum()
+                ].compartment_population.sum()
             elif row.compartment == "INCARCERATION - GENERAL":
-                compartment_total_pop = total_pop[
+                compartment_pop = total_pop[
                     total_pop.compartment.isin(
                         [
                             "INCARCERATION - GENERAL",
                             "INCARCERATION - RE-INCARCERATION",
                         ]
                     )
-                ].total_population.sum()
+                ].compartment_population.sum()
                 excluded_general_pop = excluded_pop = excluded_pop[
                     excluded_pop.compartment.isin(
                         [
@@ -217,28 +215,28 @@ class Exporter:
                             "INCARCERATION - RE-INCARCERATION",
                         ]
                     )
-                ].total_population.sum()
+                ].compartment_population.sum()
                 scale_factors[row.compartment] = (
-                    1 - excluded_general_pop / compartment_total_pop
+                    1 - excluded_general_pop / compartment_pop
                 )
                 continue
             elif row.compartment == "SUPERVISION - ALL":
-                compartment_total_pop = total_pop[
+                compartment_pop = total_pop[
                     total_pop.compartment.isin(
                         ["SUPERVISION - PROBATION", "SUPERVISION - PAROLE"]
                     )
-                ].total_population.sum()
+                ].compartment_population.sum()
             elif row.compartment == "SUPERVISION - INTERNAL_UNKNOWN":
-                compartment_total_pop = row.total_population
+                compartment_pop = row.compartment_population
             else:
-                compartment_total_pop = total_pop[
+                compartment_pop = total_pop[
                     total_pop.compartment == row.compartment
-                ].total_population.sum()
+                ].compartment_population.sum()
 
-            if compartment_total_pop == 0:
-                raise ValueError(f"Total population for {row.compartment} cannot be 0")
+            if compartment_pop == 0:
+                raise ValueError(f"Population for {row.compartment} cannot be 0")
             scale_factors[row.compartment] = (
-                1 - row.total_population / compartment_total_pop
+                1 - row.compartment_population / compartment_pop
             )
 
         return scale_factors
@@ -246,8 +244,6 @@ class Exporter:
     def _get_output_metrics(
         self,
         formatted_simulation_results: pd.DataFrame,
-        sub_group_ids_dict: Dict[str, Dict[str, Any]],
-        disaggregation_axes: List[str],
         cost_multipliers: pd.DataFrame,
     ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """
@@ -258,29 +254,36 @@ class Exporter:
         spending_diff_non_cumulative = pd.DataFrame()
         spending_diff = pd.DataFrame()
 
+        simulation_groups = list(
+            formatted_simulation_results["simulation_group"].unique()
+        )
+
         cost_multipliers = self._get_complete_cost_multipliers(
-            cost_multipliers, sub_group_ids_dict, disaggregation_axes
+            cost_multipliers, simulation_groups
         )
 
         # go through and calculate differences for each subgroup
-        for subgroup_tag, subgroup_dict in sub_group_ids_dict.items():
+        for subgroup_tag in simulation_groups:
             subgroup_data = formatted_simulation_results[
                 formatted_simulation_results["simulation_group"] == subgroup_tag
             ]
 
             subgroup_life_years_diff = pd.DataFrame(
-                index=subgroup_data.year.unique(),
+                index=subgroup_data.index.get_level_values("year").unique(),
                 columns=subgroup_data.compartment.unique(),
             )
 
             for compartment_name, compartment_data in subgroup_data.groupby(
                 "compartment"
             ):
+                # Compute the population difference with integer values
+                # so compartments with fractional population differences (less than 1)
+                # do not indicate any cost changes
                 subgroup_life_years_diff.loc[
-                    compartment_data.year, compartment_name
+                    compartment_data.index.get_level_values("year"), compartment_name
                 ] = (
-                    compartment_data["control_total_population"]
-                    - compartment_data["policy_total_population"]
+                    compartment_data["control_compartment_population"].astype(int)
+                    - compartment_data["policy_compartment_population"].astype(int)
                 ) * self.time_converter.get_time_step()
 
             subgroup_spending_diff_non_cumulative = (
@@ -291,12 +294,7 @@ class Exporter:
 
             # pull out cost multiplier for this subgroup
             multiplier = (
-                cost_multipliers[
-                    (
-                        cost_multipliers[disaggregation_axes]
-                        == pd.Series(subgroup_dict)
-                    ).all(axis=1)
-                ]
+                cost_multipliers[cost_multipliers["simulation_group"] == subgroup_tag]
                 .iloc[0]
                 .multiplier
             )
@@ -324,32 +322,27 @@ class Exporter:
     def _get_complete_cost_multipliers(
         cls,
         cost_multipliers: pd.DataFrame,
-        sub_group_ids_dict: Dict[str, Dict[str, Any]],
-        disaggregation_axes: List[str],
+        simulation_groups: List[str],
     ) -> pd.DataFrame:
         """Gets the complete cost multipliers."""
         if cost_multipliers.empty:
-            cost_multipliers = pd.DataFrame(
-                columns=disaggregation_axes + ["multiplier"]
+            complete_cost_multipliers = pd.DataFrame(
+                columns=["simulation_group", "multiplier"]
             )
+        else:
+            complete_cost_multipliers = cost_multipliers.copy()
 
-        missing_disaggregation_axes = [
-            axis for axis in disaggregation_axes if axis not in cost_multipliers
-        ]
-        if len(missing_disaggregation_axes) > 0:
-            raise ValueError(
-                f"Cost multipliers df missing disaggregation axes: {missing_disaggregation_axes}"
-            )
-
-        # fill in missing subgroups with identity multiplier = 1
-        for subgroup_dict in sub_group_ids_dict.values():
-            if cost_multipliers[
-                (cost_multipliers[disaggregation_axes] == pd.Series(subgroup_dict)).all(
-                    axis=1
+        for simulation_group in simulation_groups:
+            if simulation_group not in complete_cost_multipliers["simulation_group"]:
+                complete_cost_multipliers = pd.concat(
+                    [
+                        complete_cost_multipliers,
+                        pd.Series(
+                            {"simulation_group": simulation_group, "multiplier": 1}
+                        )
+                        .to_frame()
+                        .T,
+                    ],
+                    ignore_index=True,
                 )
-            ].empty:
-                cost_multipliers = cost_multipliers.append(
-                    {**subgroup_dict, **{"multiplier": 1}}, ignore_index=True
-                )
-
-        return cost_multipliers
+        return complete_cost_multipliers

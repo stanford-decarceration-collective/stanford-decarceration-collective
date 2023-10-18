@@ -14,8 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # =============================================================================
-"""outflow calculating object for ShellCompartments"""
-
+"""admission calculating object for ShellCompartments"""
 from enum import Enum, auto
 from typing import Dict, Tuple
 
@@ -42,9 +41,10 @@ class PredictedAdmissions:
         constant_admissions: bool,
     ):
         """
-        historical_data is a DataFrame with columns for each time step and rows for each outflow_to type (jail, prison).
+        historical_data is a DataFrame with columns for each time step and rows for each admission_to type (jail,
+        prison).
         Columns need to be numeric.
-        Data must be continuous for each outflow, i.e. only NaN values on either end.
+        Data must be continuous for each admission, i.e. only NaN values on either end.
 
         The input data will not necessarily be sorted in temporal order, so that step is done here. Additionally, an
         ARIMA model will fail if all data is 0, so any rows with no data will be dropped as well.
@@ -57,8 +57,8 @@ class PredictedAdmissions:
             Tuple[str, PredictionDirectionType], ARIMAResults
         ] = {}
         self.predictions_df = pd.DataFrame(
-            columns=["outflow_to", "time_step"]
-        ).set_index(["outflow_to", "time_step"])
+            columns=["admission_to", "time_step"]
+        ).set_index(["admission_to", "time_step"])
 
         # if historical data has more than specified number of years, train an ARIMA model
         if (
@@ -113,50 +113,59 @@ class PredictedAdmissions:
     def _infer_missing_data(
         historical_data: pd.DataFrame, constant_admissions: bool
     ) -> Tuple[pd.DataFrame, bool]:
-        """Fill in historical data so all outflows cover the same time steps of data"""
-        historical_data = historical_data.sort_index(axis=1)
+        """Fill in historical data so all admission_to cover the same time steps of data"""
 
-        for outflow, row in historical_data.iterrows():
+        # Convert different forms of NA into "None" to make processing the missing values easier
+        historical_data.replace({np.nan: None}, inplace=True)
+        historical_data = historical_data.astype(float).sort_index(axis=1)
+
+        for admission, row in historical_data.iterrows():
             missing_data = historical_data.columns[row.isnull()]
 
-            min_data_ts = row.dropna().index.min()
-            max_data_ts = row.dropna().index.max()
+            min_data_time_step = row.dropna().index.min()
+            max_data_time_step = row.dropna().index.max()
 
-            missing_data_backward = missing_data[missing_data < min_data_ts]
-            missing_data_forward = missing_data[missing_data > max_data_ts]
+            missing_data_backward = missing_data[missing_data < min_data_time_step]
+            missing_data_forward = missing_data[missing_data > max_data_time_step]
 
             if not missing_data_backward.empty:
                 if len(row.dropna()) < MIN_NUM_DATA_POINTS:
                     constant_admissions = True
                     historical_data.loc[
-                        outflow, missing_data_backward
-                    ] = historical_data.loc[outflow, min_data_ts]
+                        admission, missing_data_backward
+                    ] = historical_data.loc[admission, min_data_time_step]
                 else:
                     model_backcast = (
-                        ARIMA(row.iloc[::-1].dropna().values, order=ORDER, trend="t")
+                        ARIMA(
+                            row.iloc[::-1].dropna().values.astype(float),
+                            order=ORDER,
+                            trend="t",
+                        )
                         .fit()
                         .forecast(steps=len(missing_data_backward))
                     )
 
                     # flip the predictions back around so they're ordered correctly for the historical data indexing
                     historical_data.loc[
-                        outflow, missing_data_backward
+                        admission, missing_data_backward
                     ] = model_backcast[::-1]
 
             if not missing_data_forward.empty:
                 if len(row.dropna()) < MIN_NUM_DATA_POINTS:
                     constant_admissions = True
                     historical_data.loc[
-                        outflow, missing_data_forward
-                    ] = historical_data.loc[outflow, max_data_ts]
+                        admission, missing_data_forward
+                    ] = historical_data.loc[admission, max_data_time_step]
                 else:
                     model_forecast = (
-                        ARIMA(row.dropna().values, order=ORDER, trend="t")
+                        ARIMA(row.dropna().values.astype(float), order=ORDER, trend="t")
                         .fit()
                         .forecast(steps=len(missing_data_forward))
                     )
 
-                    historical_data.loc[outflow, missing_data_forward] = model_forecast
+                    historical_data.loc[
+                        admission, missing_data_forward
+                    ] = model_forecast
         return historical_data, constant_admissions
 
     def _train_arima_models(self) -> None:
@@ -165,15 +174,15 @@ class PredictedAdmissions:
         A dictionary is created for each admission type with both a forecasting model and a backcasting model
         """
         trained_model_dict = {}
-        for outflow_compartment, row in self.historical_data.iterrows():
+        for admission_compartment, row in self.historical_data.iterrows():
             model_forecast = ARIMA(row.values, order=ORDER, trend="t")
             model_backcast = ARIMA(row.iloc[::-1].values, order=ORDER, trend="t")
             try:
                 trained_model_dict[
-                    (outflow_compartment, PredictionDirectionType.FORWARD)
+                    (admission_compartment, PredictionDirectionType.FORWARD)
                 ] = model_forecast.fit()
                 trained_model_dict[
-                    (outflow_compartment, PredictionDirectionType.BACKWARD)
+                    (admission_compartment, PredictionDirectionType.BACKWARD)
                 ] = model_backcast.fit()
 
             except LinAlgError:
@@ -194,10 +203,10 @@ class PredictedAdmissions:
                     trend="t",
                 )
                 trained_model_dict[
-                    (outflow_compartment, PredictionDirectionType.FORWARD)
+                    (admission_compartment, PredictionDirectionType.FORWARD)
                 ] = model_forecast.fit()
                 trained_model_dict[
-                    (outflow_compartment, PredictionDirectionType.BACKWARD)
+                    (admission_compartment, PredictionDirectionType.BACKWARD)
                 ] = model_backcast.fit()
 
         self.trained_model_dict = trained_model_dict
@@ -215,14 +224,14 @@ class PredictedAdmissions:
 
         predictions_df = pd.DataFrame()
 
-        for outflow_compartment, row in self.historical_data.iterrows():
+        for admission_compartment, row in self.historical_data.iterrows():
             # If not specified to use the constant rate assumption...
             if not self.predict_constant_value:
                 # Create dataframes to store forecasted and backcasted model outputs
                 predictions_df_sub = pd.DataFrame()
                 if len(pred_periods_backward) > 0:
                     backward_df = self._get_arima_predictions_df(
-                        outflow_compartment=outflow_compartment,
+                        admission_compartment=admission_compartment,
                         cast_type=PredictionDirectionType.BACKWARD,
                         prediction_indexes=pred_periods_backward,
                     )
@@ -230,7 +239,7 @@ class PredictedAdmissions:
 
                 if len(pred_periods_forward) > 0:
                     forward_df = self._get_arima_predictions_df(
-                        outflow_compartment=outflow_compartment,
+                        admission_compartment=admission_compartment,
                         cast_type=PredictionDirectionType.FORWARD,
                         prediction_indexes=pred_periods_forward,
                     )
@@ -241,20 +250,26 @@ class PredictedAdmissions:
                     start_period:end_period
                 ]
 
-            # If using the constant rate assumption, just take the last value
+            # If using the constant rate assumption, just take the average of the last 12 values
+            # TODO(#10033): update constant admissions logic to be more accurate
             else:
                 predictions_df_sub = pd.DataFrame(
                     index=range(start_period, end_period + 1),
                     columns=["predictions"],
-                ).sort_index()
+                )
+                predictions_df_sub.sort_index(inplace=True)
+                # Take the average of all rows if there are less than 12
+                number_of_rows = min(len(row), 12)
+                avg_forward_value = np.mean(row.iloc[:number_of_rows])
                 predictions_df_sub.loc[
                     predictions_df_sub.index < int(self.historical_data.columns.min()),
                     "predictions",
-                ] = row.iloc[0]
+                ] = avg_forward_value
+                avg_backwards_value = np.mean(row.iloc[-number_of_rows:])
                 predictions_df_sub.loc[
                     predictions_df_sub.index > int(self.historical_data.columns.max()),
                     "predictions",
-                ] = row.iloc[-1]
+                ] = avg_backwards_value
                 predictions_df_sub = predictions_df_sub[
                     ~predictions_df_sub.index.isin(self.historical_data.columns)
                 ]
@@ -262,18 +277,19 @@ class PredictedAdmissions:
             # Label the dataframe indices
             predictions_df_sub.index.name = "time_step"
             predictions_df_sub = pd.concat(
-                {outflow_compartment: predictions_df_sub}, names=["outflow_to"]
+                {admission_compartment: predictions_df_sub}, names=["admission_to"]
             )
 
-            # Clip negative values at 0, throw warning if lower bound hit
-            predictions_df_sub.loc[
-                predictions_df_sub.predictions < 0, "predictions"
-            ] = 0
+            # Throw warning if the lower bound has been hit
             warn_text = "Warning: lower bound hit when predicting admissions."
-            if any(predictions_df_sub.predictions == 0) and (
+            if any(predictions_df_sub.predictions < 0) and (
                 warn_text not in self.warnings
             ):
                 self.warnings.append(warn_text)
+            # Clip negative values at 0
+            predictions_df_sub["predictions"] = predictions_df_sub["predictions"].clip(
+                lower=0
+            )
 
             # append df_sub to df
             max_allowable_pred = predictions_df_sub["predictions"].max()
@@ -294,22 +310,22 @@ class PredictedAdmissions:
 
     def _get_arima_predictions_df(
         self,
-        outflow_compartment: str,
+        admission_compartment: str,
         cast_type: PredictionDirectionType,
         prediction_indexes: range,
     ) -> pd.DataFrame:
         """Helper function to generate the ARIMA forecast DataFrame for the provided prediction period
 
         Args:
-            outflow_compartment: The compartment to generate the predicted admissions for
+            admission_compartment: The compartment to generate the predicted admissions for
             cast_type: the type of forecast to use (forecast or backcast) from within the trained model
             prediction_indexes: the index labels for the generated prediction DataFrame
 
         Returns:
             pd.DataFrame with columns for the prediction, high/low conf interval, and standard error
         """
-        outflow_model = self.trained_model_dict[outflow_compartment, cast_type]
-        predictions_array = outflow_model.forecast(steps=len(prediction_indexes))
+        admission_model = self.trained_model_dict[admission_compartment, cast_type]
+        predictions_array = admission_model.forecast(steps=len(prediction_indexes))
         prediction_data = {
             "predictions": predictions_array,
         }
