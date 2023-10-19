@@ -232,7 +232,7 @@ class PopulationSimulation:
                 {simulation_tag: sub_simulation.gen_arima_output_df()},
                 names=["simulation_group"],
             )
-            arima_output_df = arima_output_df.append(output_df_sub)
+            arima_output_df = pd.concat([arima_output_df,output_df_sub])
         return arima_output_df
 
     def gen_scale_factors_df(self) -> pd.DataFrame:

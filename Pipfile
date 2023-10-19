@@ -12,6 +12,7 @@ pandas_gbq = "*"
 pyyaml = "*"
 statsmodels = "*"
 selenium = "*"
+tqdm = "*"
 
 [dev-packages]
 

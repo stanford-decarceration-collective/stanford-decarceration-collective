@@ -20,11 +20,15 @@ from typing import Dict
 
 import numpy as np
 import pandas as pd
+import warnings
 
 from cohort_table import CohortTable
 from compartment_transitions import CompartmentTransitions
 from spark_compartment import SparkCompartment
 from utils.transitions_utils import SIG_FIGS
+
+# Filter performance warnings
+warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 
 
 class FullCompartment(SparkCompartment):
