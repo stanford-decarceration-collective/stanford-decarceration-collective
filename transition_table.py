@@ -236,7 +236,6 @@ class TransitionTable:
             #         f"Transition table doesn't release everyone: "
             #         f"{normalized_df.iloc[-1]}"
             #     )
-
             raise ValueError(
                 f"Transition table doesn't release everyone: "
                 f"{normalized_df.iloc[-1]}"
