@@ -16,6 +16,7 @@
 # =============================================================================
 """table containing probabilities of transition to other FullCompartments used by CompartmentTransitions object"""
 import collections
+import logging
 from typing import Any, Dict, List, Optional
 
 import numpy as np
@@ -443,6 +444,12 @@ class TransitionTable:
         self, alternate_historical_transitions: pd.DataFrame, retroactive: bool
     ) -> None:
         """Replace the historical admission data for this specific group with another data from a different set"""
+        if len(alternate_historical_transitions.simulation_group.unique()) > 1:
+            logging.warning(
+                "Multiple simulation groups in alternate transitions for single compartment/simulation group: %s",
+                alternate_historical_transitions.simulation_group.unique().tolist()
+            )
+
         self.extend_tables(
             int(alternate_historical_transitions.compartment_duration.max())
         )
