@@ -14,7 +14,7 @@ time_step: 0.08333333333
 # one month
 
 data_inputs:
-  big_query_simulation_tag: second_look_subs
+  big_query_simulation_tag: second_look_b
 
 per_year_costs:
 # marginal costs
