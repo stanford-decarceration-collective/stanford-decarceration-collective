@@ -1,7 +1,7 @@
 user_inputs:
     start_year: 2019.0
     projection_years: 10.0
-    speed_run: false
+    speed_run: true
 
 compartments_architecture:
     pretrial: shell
