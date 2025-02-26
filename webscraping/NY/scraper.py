@@ -49,6 +49,7 @@ def check_id(din):
         record = {}
 
         for key in record_xpaths:
+            # 'crimes_class' and 'crimes_name' have to be filled out iteratively, so handled in a special case
             if key == 'crimes_class':
                 record['crimes_name'] = ''
                 record['crimes_class'] = ''
@@ -62,15 +63,16 @@ def check_id(din):
 
                     record['crimes_name'] += crime_name + ','
                     record['crimes_class'] += crime_class + ','
-
+            # Iteration for 'crimes_name' is already done in the step above
             elif key == 'crimes_name':
                 pass
             elif type(key) == str:
                 record[key] = driver.find_element(By.XPATH, record_xpaths[key]).text
         return record
-    
+    # Handle offender page not showing up
     except NoSuchElementException:
         try:
+            # Move on if din is invalid
             error = driver.find_element(By.XPATH, error_xpath)
             print('Error:', error.text)
             record = False
@@ -78,8 +80,10 @@ def check_id(din):
             # Keep waiting if there's no error
             record = check_id(din)
     except Exception:
+        # For other exceptions, move on
         record = False
     finally:
+        # Click on the "Start a new search" link if there was a record
         if record:
             WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, new_search_xpath))).click()
         else:
@@ -92,23 +96,19 @@ with open('ny_records.csv', 'w') as records:
     writer.writerow(list(record_xpaths.keys()))
 
     year = 22
-    reception_faciltiies = ['A']#, 'B', 'C', 'G','R']
+    reception_faciltiies = ['A', 'B', 'C', 'G','R']
     inmate_no = 0
+    max_inmate_no = 100
 
     driver.get('https://nysdoccslookup.doccs.ny.gov/')
     driver.implicitly_wait(2)
         
 
     for facility in reception_faciltiies:
-        for i in range(1, 100):
-            #driver.get('https://nysdoccslookup.doccs.ny.gov/')
+        for i in range(1, max_inmate_no):
             din = f'{year}{facility}{int(i):04d}'
             record = check_id(din)
             if record:
                 writer.writerow(list(record.values()))
-
-            #WebDriverWait(driver, 1000000).until(EC.element_to_be_clickable((By.XPATH, new_search_xpath))).click()
-            #new_search = driver.find_element(By.XPATH, new_search_xpath)
-            #new_search.click()
 
 driver.quit()
