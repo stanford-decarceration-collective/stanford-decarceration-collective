@@ -1,3 +1,6 @@
+# Note: Possibly skips records if missing information
+# Also if a key is somehow skipped over the columns get messed up
+
 import csv
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,7 +20,7 @@ error_xpath = '/html/body/app/div[1]/div/div[3]/div[1]'
 new_search_xpath = '/html/body/app/div[1]/div/div[3]/div[2]'
 
 record_xpaths = {
-    'name': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[1]/div/div[1]/div/h3',
+    'din' : '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[1]/div/div[2]/div/span',
     'ethnicity': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[1]/div/div[4]/div[1]',
     'age': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[1]/div/div[4]/div[3]',
     'custody_status': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[1]/div/div[5]/div[2]',
@@ -35,8 +38,10 @@ record_xpaths = {
     'max_expiration_date': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[15]/div[2]',
     'max_expiration_date_parole_supervision': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[16]/div[2]',
     'post_release_supervision_max_expiration_date': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[17]/div[2]',
-    'parole_board_discharge_date': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[18]/div[2]'
+    'parole_board_discharge_date': '/html/body/app/div[1]/div/div[3]/div[4]/div[2]/div[18]/div[2]',
+    'linked_dins': 'body > app > div.main > div.content.px-4 > div.container > div > div.container > div.row.d-flex > div.col-sm-5.overflow-auto.border.border-dark > div.position-absolute > div.row > div.col-sm-12 > table.table.table-striped.table-bordered.table-hover.table-responsive-sm > tbody > tr > td.text-left > a'
 }
+
 
 def check_id(din):
     try:
@@ -53,25 +58,28 @@ def check_id(din):
             if key == 'crimes_class':
                 record['crimes_name'] = ''
                 record['crimes_class'] = ''
-                
+
                 for i in range(1, 4):
                     crime_name = driver.find_element(By.XPATH, record_xpaths['crimes_name'](i)).text
                     crime_class = driver.find_element(By.XPATH, record_xpaths['crimes_class'](i)).text
 
                     if crime_name.strip() == '':
                         break
-
                     record['crimes_name'] += crime_name + ','
                     record['crimes_class'] += crime_class + ','
             # Iteration for 'crimes_name' is already done in the step above
             elif key == 'crimes_name':
                 pass
             elif type(key) == str:
-                record[key] = driver.find_element(By.XPATH, record_xpaths[key]).text
-            
+                # CSS Selector
+                if '>' in record_xpaths[key]:
+                    record[key] = [e.text for e in driver.find_elements(By.CSS_SELECTOR, record_xpaths[key])]
+                # XPath
+                else:
+                    record[key] = driver.find_element(By.XPATH, record_xpaths[key]).text
         return record
     # Handle offender page not showing up
-    except NoSuchElementException:
+    except NoSuchElementException as e:
         try:
             # Move on if din is invalid
             error = driver.find_element(By.XPATH, error_xpath)
@@ -81,7 +89,6 @@ def check_id(din):
             # Keep waiting if there's no error
             record = check_id(din)
     except Exception as e:
-        print(e)
         # For other exceptions, move on
         record = False
     finally:
@@ -89,39 +96,32 @@ def check_id(din):
         if record:
             WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH, new_search_xpath))).click()
         else:
-            din_input.clear()
+            if din_input:
+                din_input.clear()
 
         return record
 
-def main():
-    with open('ny_records.csv', 'w') as records:
-        writer = csv.writer(records, lineterminator='\n')
-        writer.writerow(list(record_xpaths.keys()))
 
-        year = 22
-        reception_faciltiies = ['B']#['A', 'B', 'C', 'G','R']
-        inmate_no = 0
-        max_inmate_no = 36
+with open('ny_records.csv', 'w') as records:
+    writer = csv.writer(records, lineterminator='\n')
+    writer.writerow(list(record_xpaths.keys()))
 
-        driver.get('https://nysdoccslookup.doccs.ny.gov/')
-        driver.implicitly_wait(2)
-        
-        for facility in reception_faciltiies:
-            for i in range(1, max_inmate_no):
-                din = f'{year}{facility}{int(i):04d}'
-                print('DIN:', din)
-                record = check_id(din)
-                if record:
-                    writer.writerow(list(record.values()))
+    year = 22
+    # Isaac: ['A', 'B']
+    # Ann: ['C', 'G']
+    # Danny(**no pressure**): ['R']
+    reception_faciltiies = ['A', 'B', 'C', 'G', 'R']
+    inmate_no = 0
+    max_inmate_no = 100
 
-
-def test():
     driver.get('https://nysdoccslookup.doccs.ny.gov/')
-    driver.implicitly_wait(5)
-    
-    rec = check_id('22B0035')
-    print(rec)
+    driver.implicitly_wait(2)
 
-#test()
-main()
-#driver.quit()
+    for facility in reception_faciltiies:
+        for i in range(1, max_inmate_no):
+            din = f'{year}{facility}{int(i):04d}'
+            record = check_id(din)
+            if record:
+                writer.writerow(list(record.values()))
+
+driver.quit()
